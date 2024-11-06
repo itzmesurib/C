@@ -1,19 +1,12 @@
-#include <stdio.h>
+#include<stdio.h>
 
-int addTen(int *num) {
-    
-    *num = *num + 10;
-    
-    return *num;
-}
+void doubleValue(int *num) {
+    *num = *num + *num;
+    printf("The value of num inside the function is %d\n", *num);
+} 
 
 int main() {
-
-    int a = 10;
-    
-    addTen(&a);
-    
-    printf("%d", a);
-
-    return 0;
+    int num = 100;
+    doubleValue(&num);
+    printf("The value of num outside the function is %d\n", num);
 }

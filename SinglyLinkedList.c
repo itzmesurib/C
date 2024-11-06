@@ -1,18 +1,22 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node {
+struct Node {
     int data;
-    struct node *link;
+    struct Node* next;
 };
 
+struct Node head = NULL;
+
+void insertAtBeginning(struct Node* head, int data) {
+    struct Node* newNode = (struct Node *)malloc(size(struct Node));
+    newNode->data = data;
+    newNode->next = *head;
+    *head = newNode;
+}
+
+
 int main() {
-    struct node *head = NULL;
-    head = (struct node *)malloc(sizeof(struct node));
 
-    head -> data = 45;
-    head -> link = NULL;
-
-    printf("%d\n", head->data);
-    return 0;
+    insertAtBeginning(head, 10);
 }
