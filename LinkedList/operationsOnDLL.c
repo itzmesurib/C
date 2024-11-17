@@ -7,16 +7,17 @@ typedef struct Node {
     struct Node* next;
 } Node;
 
-Node* insertNodeAtBeginning(int data, Node* head) {
+Node* head = NULL;
+
+void insertNodeAtBeginning(int data) {
     Node* newNode = (Node *)malloc(sizeof(Node));
     newNode->data = data;
     newNode->next = head;
     head->prev = newNode;
     head = newNode;
-    return head; 
 }
 
-Node* insertNodeAtEnd(int data, Node* head) {
+void insertNodeAtEnd(int data) {
     Node* temp = head;
     while(temp->next != NULL) {
         temp = temp->next; 
@@ -25,10 +26,9 @@ Node* insertNodeAtEnd(int data, Node* head) {
     newNode->data = data;
     newNode->prev = temp;
     temp->next = newNode;
-    return head;
 }
 
-Node* insertNodeAtMiddle(int data, Node* head) {
+void insertNodeAtMiddle(int data) {
     Node* temp = head;
     Node* curr = head;
     while(temp->next != NULL) {
@@ -42,10 +42,9 @@ Node* insertNodeAtMiddle(int data, Node* head) {
     curr->next = newNode;
     temp = newNode->next;
     temp->prev = newNode;
-    return head;
 }
 
-void printLinkedList(Node* head) {
+void printLinkedList() {
     Node* temp = head;
     while(temp) {
         printf("%d -> ", temp->data);
@@ -54,7 +53,7 @@ void printLinkedList(Node* head) {
     printf("NULL\n");
 }
 
-void printReverseLinkedList(Node* head) {
+void printReverseLinkedList() {
     Node* temp = head;
     while(temp->next != NULL) {
         temp = temp->next;
@@ -89,16 +88,16 @@ int main() {
     third->prev = second;
     second->prev = first;
 
-    Node* head = first;
+    head = first;
 
-    head = insertNodeAtBeginning(5, head);
+    insertNodeAtBeginning(5);
 
-    head = insertNodeAtEnd(60, head);
+    insertNodeAtEnd(60);
 
-    head = insertNodeAtMiddle(35, head);
+    insertNodeAtMiddle(35);
 
-    printLinkedList(head);
+    printLinkedList();
 
-    printReverseLinkedList(head);
+    printReverseLinkedList();
 
 }

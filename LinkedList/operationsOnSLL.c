@@ -1,90 +1,91 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
 typedef struct Node {
     int data;
     struct Node* next;
 } Node;
 
-Node* addNodeAtEnd(int data, Node* head) {
+Node* head = NULL;
+
+void insertNodeAtEnd(int data) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->data = data;
-    newNode->next = NULL;
-
-    if (!head) {
-        head = newNode;
-    } else {
-        Node* temp = head;
-        while (temp->next) { 
-            temp = temp->next;
-        }
-        temp->next = newNode; 
+    Node* temp = head;
+    while(temp->next!=NULL) {
+        temp = temp->next;
     }
-    return head;
+    temp->next = newNode;
 }
 
-Node* addNodeAtStart(int data, Node* head) {
-    Node* newNode = (Node *)malloc(sizeof(Node));
+void insertNodeAtBeginning(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->data = data;
     newNode->next = head;
     head = newNode;
-    return head;
 }
 
-Node* insertNodeAtPostion(int data, int pos, Node* head) {
+void insertNodeAtMiddle(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    int length = 0;
+    Node* temp = head;
+    while(temp) {
+        length++;
+        temp = temp->next;
+    }
+    temp = head;
+    for(int i=0; i<(length/2); i++) {
+        temp = temp->next;
+    }
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+void insertNodeAtPosition(int data,int pos) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
     Node* temp = head;
     for(int i=0; i<pos-1; i++) {
         temp = temp->next;
     }
-    Node* newNode = (Node *)malloc(sizeof(Node));
-    newNode->data = data;
     newNode->next = temp->next;
     temp->next = newNode;
-    return head;
 }
 
-Node* insertNodeAtMiddle(int data, Node* head) {
+void printLinkedList() {
     Node* temp = head;
-    Node* curr = head;
-    int length = 0;
     while(temp) {
-        temp = temp->next;
-        length++;
-    }
-    for(int i=0; i<(length/2)-1; i++) {
-        curr = curr->next;
-    }
-    Node* newNode = (Node *)malloc(sizeof(Node));
-    newNode->data = data;
-    newNode->next = curr->next;
-    curr->next = newNode;
-    return head;
-}
-
-void printLinkedList(Node* head) {
-    Node* temp = head;
-    while (temp) {
         printf("%d -> ", temp->data);
         temp = temp->next;
     }
-    printf("NULL\n"); 
+    printf("NULL");
 }
 
+ 
 int main() {
-    Node* head = NULL;
-
-    head = addNodeAtEnd(10, head);
-    head = addNodeAtEnd(20, head);
-    head = addNodeAtEnd(30, head);
-    head = addNodeAtEnd(40, head);
+    Node* first = (Node *)malloc(sizeof(Node));
+    first->data = 10;
+    Node* second = (Node*)malloc(sizeof(Node));
+    second->data = 20;
+    Node* third = (Node*)malloc(sizeof(Node));
+    third->data = 30;
     
-    head = addNodeAtStart(5, head);
+    first->next = second;
+    second->next = third;
     
-    head = insertNodeAtPostion(25, 3, head);
+    struct Node* temp = first;
     
-    head = insertNodeAtMiddle(22, head);
+    head = first;
+    
+    insertNodeAtEnd(40);
+    
+    insertNodeAtBeginning(5);
+    
+    insertNodeAtMiddle(25);
+    
+    insertNodeAtPosition(12, 2);
+    
+    printLinkedList();
 
-    printLinkedList(head);
-
-    return 0;
 }
