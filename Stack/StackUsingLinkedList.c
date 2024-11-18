@@ -50,7 +50,6 @@ void peek() {
     }
 }
 
-
 void pop() {
     top = top->next;
 }
